@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-python
+  namespace: api-python
+  labels:
+    app: api-python
+
+spec:
+  replicas: 5
+
+  selector:
+    matchLabels:
+      app: api-python
+
+  template:
+    metadata:
+      labels:
+        app: api-python
+
+    spec:
+      containers:
+        - name: api-python
+          image: ghcr.io/vao147/api-python:sha-5fbbb51
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
